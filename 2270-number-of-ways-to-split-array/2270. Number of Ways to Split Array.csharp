@@ -1,0 +1,23 @@
+public class Solution {
+    public int WaysToSplitArray(int[] nums) {
+        List<long> prefix_sum = new List<long>();
+        prefix_sum.Add(nums[0]);
+
+        for (int i = 1; i < nums.Length; i++)
+        {
+            prefix_sum.Add(prefix_sum[i-1] + nums[i]);
+        }
+
+        int ans = 0;
+        for (int i = 0; i < nums.Length-1; i++) 
+        {
+            long left_side = prefix_sum[i];
+            long right_side = prefix_sum[nums.Length-1] - prefix_sum[i];
+            if (left_side >= right_side)
+            {
+                ans++;
+            }            
+        }
+        return ans;
+    }
+}

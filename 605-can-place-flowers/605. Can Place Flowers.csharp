@@ -1,0 +1,44 @@
+public class Solution {
+    public bool CanPlaceFlowers(int[] flowerbed, int n) {
+        
+        int i = 0;
+        bool first = true;
+        
+        foreach (int flower in flowerbed)
+        {
+            if (flower.Equals(1))
+            {                
+                if (i>2 && !first)
+                {
+                    int x = i%2==0 ? i/2 - 1 : i/2;
+                    n -= x;
+                }                
+                else if (i>=2 && first)
+                {
+                    int x = i/2;
+                    n -= x;
+                }                
+                first = false;
+                i = 0;
+            }                
+            else 
+            {
+                i++;
+            }
+        }
+        
+        if (i>1 && !first)
+        {
+            int x = i/2;
+            n -= x;
+        }
+        else if (i>=1 && first)
+        {
+            int x = i%2==0 ? i/2 : i/2 + 1;
+            n -= x;
+        }
+        
+        return (n <= 0) ? true : false;
+        
+    }
+}

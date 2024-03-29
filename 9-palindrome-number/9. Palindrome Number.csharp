@@ -1,0 +1,19 @@
+public class Solution {
+    public bool IsPalindrome(int x) {
+        
+        if ( x == null || x < 0) return false;
+
+        if ( x.ToString().Length.Equals(1) ) return true;	
+
+        string y = x.ToString();
+        string z = String.Empty;
+
+        foreach (char i in y)
+        {
+            z = i + z;
+        }
+        
+        return z.Equals(y) ? true : false;
+
+    }
+}

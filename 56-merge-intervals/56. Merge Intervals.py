@@ -1,17 +1,14 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         intervals.sort()
-        hash = {}
-        prev = [0, 0] 
-        for interval in intervals:
-            start = interval[0]
-            end = interval[1]
-            if prev[1] >= start:
-                temp_large = max(end, prev[1])
-                prev_key = prev[0]
-                hash[prev_key] = temp_large
-                prev = [prev_key, temp_large]
+        stack = [intervals[0]]
+        
+        for i in range(1, len(intervals)):
+            curr = intervals[i]
+            if stack[-1][1] >= curr[0]:
+                prev = stack.pop()
+                stack.append([prev[0], max(curr[1], prev[1])])
             else:
-                hash[start] = end
-                prev = interval
-        return [[k, v] for k, v in hash.items()]
+                stack.append(curr)
+
+        return stack    
